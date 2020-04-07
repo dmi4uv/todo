@@ -1,0 +1,9 @@
+.app {
+    margin: 0 auto;
+    width:500px;
+    margin-top: 200px;
+}
+
+.app .btn-group {
+    margin-left: 107px;
+}

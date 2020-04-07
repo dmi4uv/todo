@@ -1,29 +1,63 @@
-import React from "react";
+import React, {Component} from "react";
 import "./todo-list-item.css"
 
 
-const TodoListItem = ({label, important = false}) => {
-    const style = {
-        color: important ? 'tomato' : 'black',
-        fontWeight: important ? 'bold' : 'normal'
+class TodoListItem extends Component {
+
+    state = {
+        done: false,
+        important: false
     }
 
-    return (<span className="todo-list-item">
-        <span
-            className="todo-list-item-label"
-            style={style}>
-            {label}
-        </span>
+    onLabelClick = () => {
+        this.setState(({done}) => {
+            return {done: !done}
+        })
+    }
 
-        <button type="button" className="btn btn-outline-success btn-sm">
-            <i className="fa fa-exclamation"/>
-        </button>
+    onMarkImportant = () => {
+        this.setState(({important}) => {
+            return {important: !important}
+        })
+    }
 
-        <button type="button" className="btn btn-outline-success btn-sm">
-            <i className="fa fa-trash-o"/>
-        </button>
 
-    </span>)
+    render() {
+
+        const {label} = this.props;
+        const {done, important} = this.state
+
+        let classNames = 'todo-list-item'
+
+        if (done) {
+            classNames += ' done'
+        }
+
+        if (important) {
+            classNames += ' important'
+        }
+
+
+        return (
+            <span className={classNames}>
+            <span
+                className="todo-list-item-label"
+                onClick={this.onLabelClick}>
+                {label}
+            </span>
+
+            <button type="button" className="btn btn-outline-success btn-sm" onClick={this.onMarkImportant}>
+                <i className="fa fa-exclamation"/>
+            </button>
+
+            <button type="button" className="btn btn-outline-success btn-sm">
+                <i className="fa fa-trash-o"/>
+            </button>
+
+        </span>)
+    }
+
 }
+
 
 export default TodoListItem

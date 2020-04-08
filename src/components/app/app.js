@@ -18,13 +18,9 @@ class App extends Component {
 
     deleteItem = (id) => {
         this.setState(({todoData}) => {
-            const  idx = todoData.findIndex((el)=>el.id === id)
-            todoData.splice(idx, 1)
-
-            const before = todoData.slice(0, idx)
-            const after = todoData.slice(idx+1)
-            const newArray = [...before, ...after]
-            return{
+            const idx = todoData.findIndex((el) => el.id === id)
+            const newArray = [...todoData.slice(0, idx), ...todoData.slice(idx + 1)]
+            return {
                 todoData: newArray
             }
         })
